@@ -1,0 +1,27 @@
+{
+  "name": "to_do_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julia-Neves/To_do_App.git"
+  },
+  "author": "julia neves",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Julia-Neves/To_do_App/issues"
+  },
+  "homepage": "https://github.com/Julia-Neves/To_do_App#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
