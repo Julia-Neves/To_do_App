@@ -28,27 +28,23 @@ function usuarioController(app, bd) {
 
     app.delete('/usuario/:email', (req, res) => {
         const email = req.params.email
-        const user = bd.usuarios
-       
-        for (let i = 0; i < user.length; i++){
-            if(email === user[i].email) {
-                user.splice(i, 1)
-            }
-        }
-        res.send(`{"mensagem":"<${email} deletado>"}`)
-    });
+        usuarioDAO.deletaUsuario(email)
+            .then((mensagemSucesso) => res.send({ mensagem : mensagemSucesso}))
+            .catch((mensagemFalha) => res.send({ mensagem : mensagemFalha}))
 
+    });
+ 
+    //Mudar a senha junto ao alterar nome// Teria que usar patch para nao ter que fazer isso//
     app.put('/usuario/:email', (req, res) =>{
         const email = req.params.email;
-        const user = bd.usuarios;
-
-        for(let i = 0; i <user.length; i++){
-            if(email === user[i].email){
-            user[i] = req.body;
-            }
-        }
-        res.send(`{"mensagem":"<${email} e-mail atualizado>"}`)
+        const body = req.body;
+        usuarioDAO.alteraUsuario(email, body)
+            .then((mensagemSucesso) => res.send({ mensagem : mensagemSucesso}))
+            .catch((mensagemFalha) => res.send({ mensagem : mensagemFalha}))
     });
+            
+
+        
 };
 
 module.exports = usuarioController;

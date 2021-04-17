@@ -30,4 +30,37 @@ module.exports = class TarefaDAO {
             })
         })
     }
+
+    deletaTarefa(tarefa) {
+        return new Promise((resolve, reject) => {
+            this.bd.run('DELETE FROM TAREFAS WHERE ID = (?)'
+            , [tarefa]
+            , (err) => {
+                if (err) {
+                    reject('Falha ao deletar tarefa')
+                } else {
+                    resolve('Tarefa deletada com sucesso')
+                }
+            })
+
+        })
+    };
+
+    alteraTarefa(tarefa, body) {
+        return new Promise((resolve, reject) => {
+            this.bd.run('UPDATE TAREFAS SET TITULO = (?), DESCRICAO = (?), STATUS = (?), DATACRIACAO = (?), ID_USUARIO = (?) WHERE ID = (?)' 
+            , [body.titulo, body.descricao, body.status, body.datacriacao, body.id_usuario, tarefa]
+            , (err) => {
+                if (err) {
+                    reject('Falha ao modificar tarefa')
+                } else {
+                    resolve('tarefa modificada com sucesso')
+                }
+            })
+
+
+        })
+
+    };
+
 };

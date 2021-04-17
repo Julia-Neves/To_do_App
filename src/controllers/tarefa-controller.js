@@ -24,26 +24,19 @@ function tarefaController(app, bd) {
 
     app.delete('/tarefa/:id', (req, res) => {
         const id = req.params.id
-        const assignment = bd.tarefas
-       
-        for (let i = 0; i < assignment.length; i++){
-            if(assignment === assignment[i].id) {
-                assignment.splice(i, 1)
-            }
-        }
-        res.send(`{"mensagem":"<${id} Tarefa deletada>"}`)
+        tarefaDAO.deletaTarefa(id)
+            .then((mensagemSucesso) => res.send({ mensagem : mensagemSucesso}))
+            .catch((mensagemFalha) => res.send({ mensagem : mensagemFalha}))
+
     });
 
+    //Mudar tudo junto ao alterar tarefa, para nao precisar disso seria necessario usar o patch//
     app.put('/tarefa/:id', (req, res) =>{
         const id = req.params.id;
-        const assignment = bd.tarefas;
-
-        for(let i = 0; i <assignment.length; i++){
-            if(id === assignment[i].id){
-            assignment[i] = req.body;
-            }
-        }
-        res.send(`{"mensagem":"<${id} Tarefa atualizada>"}`)
+        const body = req.body;
+        tarefaDAO.alteraTarefa(id, body)
+            .then((mensagemSucesso) => res.send({ mensagem : mensagemSucesso}))
+            .catch((mensagemFalha) => res.send({ mensagem : mensagemFalha}))
     });
 };
 

@@ -29,6 +29,47 @@ module.exports = class UsuarioDAO {
                 }
             })
         })
-    }
+    };
+
+
+    deletaUsuario(usuario) {
+        return new Promise((resolve, reject) => {
+            this.bd.run('DELETE FROM USUARIOS WHERE EMAIL = (?)'
+            , [usuario]
+            , (err) => {
+                if (err) {
+                    reject('Falha ao deletar usuario')
+                } else {
+                    resolve('Usuario deletado com sucesso')
+                }
+            })
+
+        })
+    };
+
+    // Pegando usuario todo com body como parametro,usuario como parametro filtra do usuario//
+    alteraUsuario(usuario, body) {
+        return new Promise((resolve, reject) => {
+            this.bd.run('UPDATE USUARIOS SET NOME = (?), SENHA = (?) WHERE EMAIL = (?)' 
+            , [body.nome, body.senha, usuario]
+            , (err) => {
+                if (err) {
+                    reject('Falha ao modificar usuario')
+                } else {
+                    resolve('Usuario modificado com sucesso')
+                }
+            })
+
+
+        })
+
+    };
+
 };
 
+
+
+
+
+
+ 

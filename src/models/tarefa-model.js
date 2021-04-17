@@ -1,11 +1,12 @@
 class Tarefa{
-    constructor(id, titulo, descricao, data, status, observacoes){
+    constructor(id, titulo, descricao, status, datacriacao, id_usuario){
         this.id = id,
         this.titulo = titulo,
         this.descricao = descricao,
-        this.data = data,
         this.status = status,
-        this.observacoes = observacoes;
+        this.datacriacao = datacriacao,
+        this.id_usuario = id_usuario
+       
     }
 }
 
